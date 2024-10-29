@@ -96,6 +96,17 @@ const blogSchema = new mongoose.Schema({
     published: {
         type: Boolean,
         default: false,
+    },
+    
+    comments: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: "Comment",
+        }
+    ],
+    createdOn: {
+        type: Date,
+        default: Date.now,
     }
 });
 

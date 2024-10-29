@@ -12,7 +12,9 @@ const AllAuthors = () => {
         "http://localhost:4000/api/v1/user/authors",
         { withCredentials: true }
       );
-      setAuthors(data.authors);
+      // console.log(data);
+      
+      setAuthors(data.author);
     };
     fetchAuthors();
   }, []);

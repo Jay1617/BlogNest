@@ -1,17 +1,22 @@
 import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AiFillInstagram, AiFillYoutube, AiFillLinkedin } from "react-icons/ai";
-import { FaSquareGithub  } from "react-icons/fa6";
+import { FaSquareGithub } from "react-icons/fa6";
 import { Context } from "../../main";
+import toast from "react-hot-toast";
 
 const Footer = () => {
-  const isDashboard = useLocation("http://localhost:5173/dashboard");
+  const isDashboard = useLocation().pathname;
   const { mode, setMode } = useContext(Context);
+
+  const handleSubscribe = () => {
+    toast.success("Subscribed successfully!");
+  };
 
   return (
     <footer
       className={
-        isDashboard.pathname === "/dashboard"
+        isDashboard === "/dashboard"
           ? "hideFooter"
           : mode === "light"
           ? "light-footer"
@@ -20,17 +25,19 @@ const Footer = () => {
     >
       <div className="container">
         <div className="about">
-          <h3>About</h3>
+          <h3>Join us</h3>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Consectetur possimus sed praesentium! Et sunt, distinctio veniam
-            ullam, nesciunt ex laudantium quidem error sint, eum explicabo.
+            Become a part of the BlogNest community today. Explore a world of
+            diverse content, share your thoughts, and connect with fellow
+            enthusiasts. We’re here to support you on your blogging journey and
+            look forward to bringing you exciting updates and features in the
+            future.
           </p>
           <p>
             <span>Email:</span>info@blognest.com
           </p>
           <p>
-            <span>Phone:</span>+91-815******7
+            <span>Phone:</span>+91-999******9
           </p>
         </div>
         <div className="quick_links">
@@ -55,29 +62,34 @@ const Footer = () => {
         </div>
         <div className="news_letter">
           <div>
-            <h3>Weekly Newletter</h3>
-            <p>Get blog articles and offer via email</p>
+            <h3>Get in touch with us...</h3>
+            <p>Blog articles and offers via E-mail</p>
           </div>
           <div>
             <input type="text" placeholder={`Your Email`} />
-            <button>Subscribe</button>
+            <button onClick={handleSubscribe}>Subscribe</button>
           </div>
         </div>
       </div>
       <div className="container">
-        <div className="logo">BLOG <span>NEST</span></div>
+        <div className="logo">
+          BLOG <span>NEST</span>
+        </div>
         <div className="links">
           <Link to={"/"} target="_blank">
             <AiFillInstagram />
           </Link>
           <Link to={"https://github.com/Jay1617"} target="_blank">
-            <FaSquareGithub  />
+            <FaSquareGithub />
           </Link>
-          <Link to={"www.linkedin.com/in/jay-thummar-256ba4250"} target="_blank">
-            <AiFillYoutube />
+          <Link
+            to={"https://www.linkedin.com/in/jay-thummar-256ba4250"}
+            target="_blank"
+          >
+            <AiFillLinkedin />
           </Link>
           <Link to={"/"} target="_blank">
-            <AiFillLinkedin />
+            <AiFillYoutube />
           </Link>
         </div>
       </div>

@@ -2,6 +2,8 @@ import { catchAsyncError } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Blog } from "../models/blogSchema.js";
 import cloudinary from "cloudinary";
+import { Comment } from "../models/commentSchema.js";
+// import { runAnalysis } from "../path/to/your/MLFunction.js";
 
 export const blogpost = catchAsyncError(async (req, res, next) => {
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -161,9 +163,9 @@ export const getAllBlogs = catchAsyncError(async (req, res, next) => {
     })
 });
 
-export const getSingleBlog = catchAsyncError(async (req, res, next) => {
+export const getSingleBlog = async (req, res, next) => {
     const { id } = req.params;
-    const blog = Blog.findById(id);
+    const blog = await Blog.findById(id); 
     if (!blog) {
         return next(new ErrorHandler("Blog not found!"), 404);
     }
@@ -171,7 +173,9 @@ export const getSingleBlog = catchAsyncError(async (req, res, next) => {
         status: true,
         blog,
     });
-});
+};
+
+  
 
 export const getMyBlogs = catchAsyncError(async (req, res, next) => {
     const createdBy = req.user._id;

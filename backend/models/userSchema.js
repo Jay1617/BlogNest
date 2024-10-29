@@ -15,10 +15,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         validate: [validator.isEmail, "please provide a valid email!"],
     },
-    phone:{
-        type: Number,
-        required: true,
-    },
     avatar:{
         public_id:{
             type: String,
@@ -28,10 +24,6 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-    },
-    education:{
-        type: String,
-        required: true,
     },
     role: {
         type: String,
@@ -69,3 +61,4 @@ userSchema.methods.getJWTToken = function(){
 };
 
 export const User = mongoose.model("User", userSchema);
+

@@ -10,7 +10,7 @@ const PopularAuthors = () => {
         "http://localhost:4000/api/v1/user/authors",
         { withCredentials: true }
       );
-      setAuthors(data.authors);
+      setAuthors(data.author);
     };
     fetchAuthors();
   }, []);

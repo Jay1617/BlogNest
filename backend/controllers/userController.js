@@ -4,13 +4,19 @@ import { User } from "../models/userSchema.js";
 import { sendToken } from "../utils/JwtToken.js";
 import cloudinary from "cloudinary";
 
+
 export const register = catchAsyncError(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("User Avatar required!", 400));
   }
   const { avatar } = req.files;
 
-  const allowedFormates = ["image/png", "image/jpeg", "image/webp", "image/jpg"];
+  const allowedFormates = [
+    "image/png",
+    "image/jpeg",
+    "image/webp",
+    "image/jpg",
+  ];
 
   if (!allowedFormates.includes(avatar.mimetype)) {
     return next(
@@ -21,18 +27,11 @@ export const register = catchAsyncError(async (req, res, next) => {
     );
   }
 
-  const { name, email, password, phone, role, education } = req.body;
-  if (
-    !name ||
-    !email ||
-    !password ||
-    !phone ||
-    !role ||
-    !education ||
-    !avatar
-  ) {
+  const { name, email, password, role } = req.body;
+  if (!name || !email || !password || !role || !avatar) {
     return next(new ErrorHandler("Please fill all the details"));
   }
+
   let user = await User.findOne({ email });
 
   if (user) {
@@ -54,17 +53,14 @@ export const register = catchAsyncError(async (req, res, next) => {
     name,
     email,
     password,
-    phone,
     role,
-    education,
-    avatar:{
-        public_id: cloudinaryResponse.public_id,
-        url:cloudinaryResponse.secure_url,
+    avatar: {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
     },
   });
 
   sendToken(user, 200, "User registered successfully", res);
-
 });
 
 export const login = catchAsyncError(async (req, res, next) => {
@@ -88,7 +84,6 @@ export const login = catchAsyncError(async (req, res, next) => {
   }
 
   sendToken(user, 200, "User Logged in successfully", res);
-
 });
 
 export const logout = catchAsyncError((req, res, next) => {

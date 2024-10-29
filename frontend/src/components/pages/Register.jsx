@@ -7,10 +7,8 @@ import toast from "react-hot-toast";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [education, setEducation] = useState("");
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("");
 
@@ -33,9 +31,7 @@ const Register = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
-    formData.append("phone", phone);
     formData.append("password", password);
-    formData.append("education", education);
     formData.append("role", role);
     formData.append("avatar", avatar);
 
@@ -52,9 +48,7 @@ const Register = () => {
       );
       setName("");
       setEmail("");
-      setEducation("");
       setPassword("");
-      setPhone("");
       setRole("");
       setAvatar("");
       setAvatarPreview("");
@@ -97,31 +91,12 @@ const Register = () => {
           </div>
           <div>
             <input
-              type="number"
-              placeholder="Phone Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <select
-            value={education}
-            onChange={(e) => setEducation(e.target.value)}
-          >
-            <option value="">SELECT YOUR EDUCATION</option>
-            <option value="Matric">Matric</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Graducation">Graducation</option>
-            <option value="Masters">Masters</option>
-            <option value="PhD">PhD</option>
-          </select>
           <div
             style={{
               display: "flex",
